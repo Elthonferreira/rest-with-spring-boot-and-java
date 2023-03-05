@@ -3,14 +3,33 @@ package br.com.elthon.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "person")
 public class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "first_name", nullable = false, length = 80)
 	private String firstName;
-	private String lasteName;
+	
+	@Column(name = "last_name", nullable = false, length = 80)
+	private String lastName;
+	
+	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "gender")
 	private String gender;
 	
 	public Person() {
@@ -32,12 +51,12 @@ public class Person implements Serializable{
 		this.firstName = firstName;
 	}
 
-	public String getLasteName() {
-		return lasteName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLasteName(String lasteName) {
-		this.lasteName = lasteName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getAddress() {
@@ -58,7 +77,7 @@ public class Person implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, firstName, gender, id, lasteName);
+		return Objects.hash(address, firstName, gender, id, lastName);
 	}
 
 	@Override
@@ -72,6 +91,6 @@ public class Person implements Serializable{
 		Person other = (Person) obj;
 		return Objects.equals(address, other.address) && Objects.equals(firstName, other.firstName)
 				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
-				&& Objects.equals(lasteName, other.lasteName);
+				&& Objects.equals(lastName, other.lastName);
 	}
 }

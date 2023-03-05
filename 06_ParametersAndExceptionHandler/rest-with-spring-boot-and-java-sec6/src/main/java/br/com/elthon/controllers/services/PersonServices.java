@@ -33,7 +33,7 @@ public class PersonServices {
 		Person person = new Person();
 		person.setId(counter.incrementAndGet());
 		person.setFirstName("Elthon");
-		person.setLasteName("Ferreira");
+		person.setLastName("Ferreira");
 		person.setAddress("Recife - PE - Brasil");
 		person.setGender("Male");
 		return person;
@@ -46,7 +46,7 @@ public class PersonServices {
 		Person person = new Person();
 		person.setId(counter.incrementAndGet());
 		person.setFirstName("Person name " + (i+1));
-		person.setLasteName("Last name " + (i+1));
+		person.setLastName("Last name " + (i+1));
 		person.setAddress("Some adress in Brazil");
 		person.setGender("Male");
 		return person;
