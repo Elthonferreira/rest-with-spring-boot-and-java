@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.elthon.exceptions.ExceptionResponse;
+import br.com.elthon.exceptions.ResourceNotFoundException;
 import br.com.elthon.exceptions.UnsupportedMathOperationException;
 
 @ControllerAdvice
@@ -36,20 +37,24 @@ public class CustomizedReponseEntityExceptionHandler extends ResponseEntityExcep
 	}
 	
 	@ExceptionHandler(UnsupportedMathOperationException.class)
-	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
-		
-		//COMENTEI O CÓDIGO DO PROFESSOR, PORQUE O CÓDIGO ABAIXO É MAIS INTUITIVO PARA MIM
-		/* 
-		  ExceptionResponse exceptionResponse = new ExceptionResponse( new Date(),
-		  ex.getMessage(), request.getDescription(false));
-		*/
+	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {	
 		
 		ExceptionResponse exceptionResponse = new ExceptionResponse();
-		
 		exceptionResponse.setTimestamp(new Date());
 		exceptionResponse.setMessage(ex.getMessage());
 		exceptionResponse.setDetails(request.getDescription(false));
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception ex, WebRequest request) {
+		
+		ExceptionResponse exceptionResponse = new ExceptionResponse();
+		exceptionResponse.setTimestamp(new Date());
+		exceptionResponse.setMessage(ex.getMessage());
+		exceptionResponse.setDetails(request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 }
