@@ -3,7 +3,7 @@ package br.com.elthon.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-/*import jakarta.persistence.Column;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,25 +11,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "person")*/
+@Table(name = "person")
 public class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	//@Column(name = "first_name", nullable = false, length = 80)
+	@Column(name = "first_name", nullable = false, length = 80)
 	private String firstName;
 	
-	//@Column(name = "last_name", nullable = false, length = 80)
+	@Column(name = "last_name", nullable = false, length = 80)
 	private String lastName;
 	
-	//@Column(name = "address")
+	@Column(name = "address")
 	private String address;
 	
-	//@Column(name = "gender")
+	@Column(name = "gender")
 	private String gender;
 	
 	public Person() {
