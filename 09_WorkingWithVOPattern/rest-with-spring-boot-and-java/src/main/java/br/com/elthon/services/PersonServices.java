@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.elthon.exceptions.ResourceNotFoundException;
+import br.com.elthon.mapper.DozerMapper;
+import br.com.elthon.model.Person;
 import br.com.elthon.data.vo.v1.PersonVO;
 import br.com.elthon.repositories.PersonRepository;
 
@@ -21,19 +23,25 @@ public class PersonServices {
 	public List<PersonVO> findAll() {
 		logger.info("Finding all people!");
 		
-		return personRepository.findAll();
+		return DozerMapper.parseListObjects(personRepository.findAll(), PersonVO.class);
 	}
 
 	public PersonVO findById(Long id) {
 		logger.info("Finding one person!");
 		
-		return personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+		var entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+		
+		return DozerMapper.parseObject(entity, PersonVO.class);
 	}
 	
 	public PersonVO create(PersonVO person) {
 		logger.info("Creating one person!");
 		
-		return personRepository.save(person);
+		var entity = DozerMapper.parseObject(person, Person.class);
+		
+		var vo = DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
+		
+		return vo;
 	}
 	
 	public PersonVO update(PersonVO person) {
@@ -47,7 +55,9 @@ public class PersonServices {
 		personToUpdate.setAddress(person.getAddress());
 		personToUpdate.setGender(person.getGender());
 		
-		return personRepository.save(personToUpdate);
+		var vo = DozerMapper.parseObject(personRepository.save(personToUpdate), PersonVO.class);
+		
+		return vo;
 	}
 	
 	public void delete(Long id) {
