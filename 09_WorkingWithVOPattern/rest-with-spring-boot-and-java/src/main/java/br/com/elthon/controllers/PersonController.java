@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.elthon.model.Person;
+import br.com.elthon.data.vo.v1.PersonVO;
 import br.com.elthon.services.PersonServices;
 
 @RestController
@@ -26,27 +26,27 @@ public class PersonController {
 	//private PersonServices personServices = new PersonServices();
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE) // RequestMapping vai mapear uma requisição para um método
-	public List<Person> findAll() throws Exception {
+	public List<PersonVO> findAll() throws Exception {
 	
 		return personServices.findAll();
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable (value = "id") Long id) throws Exception {
+	public PersonVO findById(@PathVariable (value = "id") Long id) throws Exception {
 	
 		return personServices.findById(id);
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 			     produces = MediaType.APPLICATION_JSON_VALUE) 
-	public Person create(@RequestBody Person person) throws Exception {
+	public PersonVO create(@RequestBody PersonVO person) throws Exception {
 	
 		return personServices.create(person);
 	}
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 			    produces = MediaType.APPLICATION_JSON_VALUE) 
-	public Person update(@RequestBody Person person) throws Exception {
+	public PersonVO update(@RequestBody PersonVO person) throws Exception {
 	
 		return personServices.update(person);
 	}

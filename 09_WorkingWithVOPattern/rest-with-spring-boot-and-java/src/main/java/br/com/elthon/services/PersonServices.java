@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.elthon.exceptions.ResourceNotFoundException;
-import br.com.elthon.model.Person;
+import br.com.elthon.data.vo.v1.PersonVO;
 import br.com.elthon.repositories.PersonRepository;
 
 @Service
@@ -18,25 +18,25 @@ public class PersonServices {
 	@Autowired
 	PersonRepository personRepository;
 	
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		logger.info("Finding all people!");
 		
 		return personRepository.findAll();
 	}
 
-	public Person findById(Long id) {
+	public PersonVO findById(Long id) {
 		logger.info("Finding one person!");
 		
 		return personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 	}
 	
-	public Person create(Person person) {
+	public PersonVO create(PersonVO person) {
 		logger.info("Creating one person!");
 		
 		return personRepository.save(person);
 	}
 	
-	public Person update(Person person) {
+	public PersonVO update(PersonVO person) {
 		logger.info("Updating one person!");
 		
 		var personToUpdate = personRepository.findById(person.getId())
