@@ -5,6 +5,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
+          <factory-entry name="rest-with-spring-boot-and-java-elthon" />
           <factory-entry name="rest-with-spring-boot-and-java-erudio" />
         </datasource-mapping>
         <naming-strategy-map />
