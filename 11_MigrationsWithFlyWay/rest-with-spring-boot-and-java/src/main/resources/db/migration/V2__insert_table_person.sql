@@ -1,10 +1,11 @@
 
 INSERT INTO `person` VALUES
-(1,'SLM','Elthon','Male','Ferreira'),
-(3,'SLM','Grace','Female','Kaller'),
-(6,'Limoeiro','Eder','Male','Lucena'),
-(8,'Recife','Anderson','Male','Mister'),
-(9,'SLM','Angelo','Male','Hugo'),
-(10,'SLM','Ricardo','Male','Alves'),
-(11,'Camaragibe','Thiago','Male','Senna'),
-(12,'SLM','Fábio','Male','Alves');
+(1,'Elthon','Ferreira','SLM','Male'),
+(3,'Grace','Kaller','SLM','Female'),
+(6,'Eder','Lucena','Limoeiro','Male'),
+(8,'Anderson','Mister','Recife','Male'),
+(9,'Angelo','Hugo','SLM','Male'),
+(10,'Ricardo','Alves','SLM','Male'),
+(11,'Thiago','Senna','Camaragibe','Male'),
+(12,'Fábio','Alves','SLM','Male');
+
