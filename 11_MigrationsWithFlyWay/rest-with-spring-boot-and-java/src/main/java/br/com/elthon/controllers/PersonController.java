@@ -25,27 +25,27 @@ public class PersonController {
 	private PersonServices personServices;
 	//private PersonServices personServices = new PersonServices();
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE) // RequestMapping vai mapear uma requisição para um método
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}) // RequestMapping vai mapear uma requisição para um método
 	public List<PersonVO> findAll() throws Exception {
 	
 		return personServices.findAll();
 	}
 
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public PersonVO findById(@PathVariable (value = "id") Long id) throws Exception {
 
 		return personServices.findById(id);
 	}
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-			     produces = MediaType.APPLICATION_JSON_VALUE) 
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+			     produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}) 
 	public PersonVO create(@RequestBody PersonVO person) throws Exception {
 	
 		return personServices.create(person);
 	}
 
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-			    produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+			    produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public PersonVO update(@RequestBody PersonVO person) throws Exception {
 	
 		return personServices.update(person);
