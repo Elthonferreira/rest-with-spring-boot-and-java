@@ -1,9 +1,9 @@
 package br.com.elthon.controllers;
 
 
+import br.com.elthon.utils.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,29 +23,28 @@ public class PersonController {
 	
 	@Autowired
 	private PersonServices personServices;
-	//private PersonServices personServices = new PersonServices();
 
-	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}) // RequestMapping vai mapear uma requisição para um método
+	@GetMapping(produces = {MediaType.JSON, MediaType.XML, MediaType.YML}) // RequestMapping vai mapear uma requisição para um método
 	public List<PersonVO> findAll() throws Exception {
 	
 		return personServices.findAll();
 	}
 
-	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@GetMapping(value = "/{id}", produces = {MediaType.JSON, MediaType.XML, MediaType.YML})
 	public PersonVO findById(@PathVariable (value = "id") Long id) throws Exception {
 
 		return personServices.findById(id);
 	}
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-			     produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}) 
+	@PostMapping(consumes = {MediaType.JSON, MediaType.XML, MediaType.YML},
+				 produces = {MediaType.JSON, MediaType.XML, MediaType.YML})
 	public PersonVO create(@RequestBody PersonVO person) throws Exception {
 	
 		return personServices.create(person);
 	}
 
-	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-			    produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PutMapping(consumes = {MediaType.JSON, MediaType.XML, MediaType.YML},
+				produces = {MediaType.JSON, MediaType.XML, MediaType.YML})
 	public PersonVO update(@RequestBody PersonVO person) throws Exception {
 	
 		return personServices.update(person);
