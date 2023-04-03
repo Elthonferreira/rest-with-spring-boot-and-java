@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import br.com.elthon.controllers.PersonController;
+import br.com.elthon.exceptions.RequiredObjectIsNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +52,12 @@ public class PersonServices {
 	}
 	
 	public PersonVO create(PersonVO person) throws Exception {
+		if (person == null) {
+			throw  new RequiredObjectIsNullException();
+		}
+
 		logger.info("Creating one person!");
-		
+
 		var entity = DozerMapper.parseObject(person, Person.class);
 		
 		var vo = DozerMapper.parseObject(personRepository.save(entity), PersonVO.class);
@@ -62,8 +67,12 @@ public class PersonServices {
 	}
 	
 	public PersonVO update(PersonVO person) throws Exception {
+		if (person == null) {
+			throw  new RequiredObjectIsNullException();
+		}
+
 		logger.info("Updating one person!");
-		
+
 		var personToUpdate = personRepository.findById(person.getKey())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		

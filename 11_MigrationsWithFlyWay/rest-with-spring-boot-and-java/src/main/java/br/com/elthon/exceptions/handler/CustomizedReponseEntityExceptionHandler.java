@@ -2,6 +2,7 @@ package br.com.elthon.exceptions.handler;
 
 import java.util.Date;
 
+import br.com.elthon.exceptions.RequiredObjectIsNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -37,7 +38,7 @@ public class CustomizedReponseEntityExceptionHandler extends ResponseEntityExcep
 	}
 	
 	@ExceptionHandler(UnsupportedMathOperationException.class)
-	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {	
+	public final ResponseEntity<ExceptionResponse> handleBadRequestMathExceptions(Exception ex, WebRequest request) {
 		
 		ExceptionResponse exceptionResponse = new ExceptionResponse();
 		exceptionResponse.setTimestamp(new Date());
@@ -56,5 +57,15 @@ public class CustomizedReponseEntityExceptionHandler extends ResponseEntityExcep
 		exceptionResponse.setDetails(request.getDescription(false));
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(RequiredObjectIsNullException.class)
+	public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
+
+		ExceptionResponse exceptionResponse = new ExceptionResponse();
+		exceptionResponse.setTimestamp(new Date());
+		exceptionResponse.setMessage(ex.getMessage());
+		exceptionResponse.setDetails(request.getDescription(false));
+
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 }

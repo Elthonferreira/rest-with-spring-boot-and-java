@@ -102,7 +102,7 @@ class PersonServicesTest {
             service.create(null);
         });
 
-        String expectedMessage = "It is not allowed to persist a null object!";
+        String expectedMessage = "It is not allowed to persist a null object.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -118,7 +118,6 @@ class PersonServicesTest {
 
         PersonVO vo = input.mockVO(1);
         vo.setKey(1L);
-
 
         when(repository.findById(1L)).thenReturn(Optional.of(entity));
         when(repository.save(entity)).thenReturn(persisted);
@@ -149,7 +148,7 @@ class PersonServicesTest {
             service.update(null);
         });
 
-        String expectedMessage = "It is not allowed to persist a null object!";
+        String expectedMessage = "It is not allowed to persist a null object.";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
